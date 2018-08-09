@@ -1,14 +1,14 @@
 version: '3.0'
 services:
-    tms-backend:
-        container_name: tms-backend
-        image: tms-backend
-        hostname: tms-backend
+    core:
+        container_name: core
+        image: core
+        hostname: core
         build:
-            context: ./tms-backend
+            context: ./core
             dockerfile: Dockerfile
         ports:
-            - 8082:8080
+            - 8080:8080
         depends_on:
             - tms-datacenter
         links:
@@ -16,27 +16,27 @@ services:
         networks:
             - app-network
         command: start
-    tms-view:
-        container_name: tms-view
-        image: tms-view
+    edge:
+        container_name: edge
+        image: edge
         build:
-            context: ./tms-view
+            context: ./edge
             dockerfile: DockerFile
         ports:
-            - 8080:80
+            - 8080:8085
         depends_on:
-            - tms-backend
+            - core
         links:
-            - tms-backend
+            - core
         networks:
             - app-network
-    tms-datacenter:
-        container_name: tms-datacenter
+    datacenter:
+        container_name: datacenter
         image: postgres
         ports:
             - 5432:5432
         volumes:
-            - tms-datacenter:/var/lib/postgresql/data
+            - datacenter:/var/lib/postgresql/data
         environment:
             - POSTGRES_PASSWORD=password
             - POSTGRES_USER=postgres
