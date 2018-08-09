@@ -10,9 +10,11 @@ services:
         ports:
             - 8080:8080
         depends_on:
-            - tms-datacenter
+            - datacenter
+            - kafka
         links:
-            - tms-datacenter
+            - datacenter
+            - kafka
         networks:
             - app-network
         command: start
@@ -21,13 +23,30 @@ services:
         image: edge
         build:
             context: ./edge
-            dockerfile: DockerFile
+            dockerfile: Dockerfile
         ports:
             - 8080:8085
         depends_on:
             - core
         links:
             - core
+        networks:
+            - app-network
+    kafka:
+        container_name: kafka
+        image: kafka
+        build:
+            context: ./kafka
+            dockerfile: DockerFile
+        ports:
+            - 9092:9092
+            - 2181:2181
+        environment:
+            - ADVERTISED_PORT=9092
+            - CONSUMER_THREADS=1
+            - TOPICS=EmailTopic
+            - ZK_CONNECT=kafka7zookeeper:2181/root/path
+            - GROUP_ID=mymirror
         networks:
             - app-network
     datacenter:
@@ -46,7 +65,7 @@ services:
             - app-network
 
 volumes:
-    tms-datacenter: {}
+    datacenter: {}
 
 networks:
   app-network:
