@@ -1,4 +1,4 @@
 FROM openjdk:8-jre-alpine
-ADD /target/*.jar  app.jar
+ADD /target/*.jar  core.jar
 ENTRYPOINT ["java","-jar","core.jar"]
 MAINTAINER Murat Demir
