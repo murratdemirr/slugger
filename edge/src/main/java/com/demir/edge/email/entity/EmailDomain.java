@@ -1,6 +1,8 @@
 package com.demir.edge.email.entity;
 
 
+import com.demir.edge.email.control.EmailDomainValidator;
+
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
