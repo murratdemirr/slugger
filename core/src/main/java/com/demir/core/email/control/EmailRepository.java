@@ -1,14 +1,18 @@
 package com.demir.core.email.control;
 
 import com.demir.core.email.entity.Email;
-import org.springframework.stereotype.Repository;
+import com.demir.core.email.entity.EmailInfo;
+import com.demir.core.email.entity.EmailSummmary;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Repository
+import static com.demir.core.email.entity.Email.FIND_EMAILS;
+
+@Service
 @Transactional
 public class EmailRepository {
 
@@ -21,10 +25,15 @@ public class EmailRepository {
 
     public void save(final List<String> emails) {
         if (emails != null && !emails.isEmpty()) {
-            System.out.println("Count: " + emails.size());
             emails.forEach(e -> save(e));
         }
     }
 
+    public EmailSummmary summmaryReport() {
+        EmailSummmary emailSummmary = new EmailSummmary();
+        List<EmailInfo> resultList = em.createNamedQuery(FIND_EMAILS).getResultList();
+        emailSummmary.setEmailInfos(resultList);
+        return emailSummmary;
+    }
 
 }

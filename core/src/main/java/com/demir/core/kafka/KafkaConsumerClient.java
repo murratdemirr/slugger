@@ -6,6 +6,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.TaskScheduler;
@@ -26,6 +27,8 @@ import static com.demir.core.BulkProcessor.FIXED_RATE;
 @Component
 public class KafkaConsumerClient {
 
+    @Value("${spring.kafka.template.default-topic}")
+    String topicName;
     @Autowired
     KafkaConsumer<String, String> consumer;
     @Autowired
@@ -36,7 +39,7 @@ public class KafkaConsumerClient {
     private boolean inProgress = false;
 
     public List<String> fetchFromQueue() {
-        consumer.subscribe(Collections.singletonList("${spring.kafka.template.default-topic}"));
+        consumer.subscribe(Collections.singletonList(topicName));
         ConsumerRecords<String, String> records = consumer.poll(5000);
         List<String> data = new ArrayList<>();
         for (ConsumerRecord<String, String> record : records) {

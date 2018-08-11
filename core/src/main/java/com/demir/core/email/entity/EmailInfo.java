@@ -5,6 +5,11 @@ public class EmailInfo {
     private String email;
     private Long count;
 
+    public EmailInfo(String email, Long count) {
+        this.email = email;
+        this.count = count;
+    }
+
     public String getEmail() {
         return email;
     }
