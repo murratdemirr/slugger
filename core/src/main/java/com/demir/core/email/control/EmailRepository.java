@@ -57,7 +57,7 @@ public class EmailRepository {
         }
     }
 
-    public EmailSummmary summmaryReport() {
+    public EmailSummmary summaryReport() {
         EmailSummmary emailSummmary = new EmailSummmary();
         List<EmailInfo> resultList = em.createNamedQuery(FIND_EMAIL_INFOS).getResultList();
         emailSummmary.setEmailInfos(resultList);
