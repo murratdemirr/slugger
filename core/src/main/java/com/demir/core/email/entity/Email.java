@@ -3,12 +3,16 @@ package com.demir.core.email.entity;
 import javax.persistence.*;
 
 import static com.demir.core.email.entity.Email.EMAIL_INFO_MAPPING;
-import static com.demir.core.email.entity.Email.FIND_EMAILS;
+import static com.demir.core.email.entity.Email.FIND_ALL;
+import static com.demir.core.email.entity.Email.FIND_EMAIL_INFOS;
 
 @Entity
 @Table(name = "EMAILS", schema = "PUBLIC")
+@NamedQueries(
+        @NamedQuery(name = FIND_ALL, query = "SELECT e FROM Email e")
+)
 @NamedNativeQueries(
-        @NamedNativeQuery(name = FIND_EMAILS, query = "SELECT t.email AS email_address, COUNT(t.email) AS total_count FROM public.emails t GROUP BY t.email", resultSetMapping = EMAIL_INFO_MAPPING)
+        @NamedNativeQuery(name = FIND_EMAIL_INFOS, query = "SELECT t.email AS email_address, COUNT(t.email) AS total_count FROM public.emails t GROUP BY t.email", resultSetMapping = EMAIL_INFO_MAPPING)
 )
 @SqlResultSetMapping(
         name = EMAIL_INFO_MAPPING,
@@ -25,7 +29,8 @@ import static com.demir.core.email.entity.Email.FIND_EMAILS;
 public class Email {
 
     private static final String PREFIX = "EmailEntity.";
-    public static final String FIND_EMAILS = PREFIX + "findEmails";
+    public static final String FIND_ALL = PREFIX + "findAll";
+    public static final String FIND_EMAIL_INFOS = PREFIX + "findEmailInfos";
     public static final String EMAIL_INFO_MAPPING = "EmailInfoMapping";
 
     @Id
