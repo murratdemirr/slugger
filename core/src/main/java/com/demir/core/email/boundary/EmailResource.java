@@ -1,5 +1,6 @@
 package com.demir.core.email.boundary;
 
+import com.demir.core.AbstractRestHandler;
 import com.demir.core.email.control.EmailRepository;
 import com.demir.core.email.entity.Email;
 import com.demir.core.email.entity.EmailSummmary;
@@ -15,7 +16,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("emails")
-public class EmailResource {
+public class EmailResource extends AbstractRestHandler {
 
     @Autowired
     EmailRepository repository;

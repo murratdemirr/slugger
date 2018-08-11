@@ -1,6 +1,6 @@
 package com.demir.core.email.control;
 
-import com.demir.core.EntiyNotFoundException;
+import com.demir.core.EntityNotFoundException;
 import com.demir.core.email.entity.Email;
 import com.demir.core.email.entity.EmailInfo;
 import com.demir.core.email.entity.EmailSummmary;
@@ -30,7 +30,7 @@ public class EmailRepository {
     public Email find(Long id) {
         Email entity = em.find(Email.class, id);
         if (entity == null) {
-            throw new EntiyNotFoundException();
+            throw new EntityNotFoundException();
         }
         return entity;
     }
