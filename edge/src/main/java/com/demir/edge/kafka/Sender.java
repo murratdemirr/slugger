@@ -1,4 +1,4 @@
-package com.demir.edge;
+package com.demir.edge.kafka;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

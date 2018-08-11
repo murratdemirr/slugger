@@ -1,4 +1,4 @@
-package com.demir.edge;
+package com.demir.edge.kafka;
 
 import java.util.HashMap;
 import java.util.Map;

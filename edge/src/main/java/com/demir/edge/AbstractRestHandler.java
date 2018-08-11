@@ -1,0 +1,26 @@
+package com.demir.edge;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.ApplicationEventPublisherAware;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.context.request.WebRequest;
+
+import javax.servlet.http.HttpServletResponse;
+
+public class AbstractRestHandler implements ApplicationEventPublisherAware {
+
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+    protected ApplicationEventPublisher eventPublisher;
+
+
+
+    @Override
+    public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
+        this.eventPublisher = applicationEventPublisher;
+    }
+}

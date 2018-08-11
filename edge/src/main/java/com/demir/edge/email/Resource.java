@@ -1,5 +1,6 @@
-package com.demir.edge;
+package com.demir.edge.email;
 
+import com.demir.edge.kafka.Sender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
