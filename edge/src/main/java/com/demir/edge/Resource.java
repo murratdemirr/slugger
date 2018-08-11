@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 /**
  * @author Demir
  *
@@ -25,7 +27,7 @@ public class Resource {
     @RequestMapping(method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public void send() {
-        sender.send("muurat.demirr@qqq.com");
+        sender.send(UUID.randomUUID().toString());
     }
 
 }
