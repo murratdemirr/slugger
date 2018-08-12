@@ -52,7 +52,16 @@ public class KafkaConsumerClient {
     public void topicListener(ConsumerRecord<?, ?> consumerRecord) {
         if (!inProgress) {
             inProgress = true;
+            triggerSchedule();
+        }
+    }
+
+    private synchronized void triggerSchedule() {
+        try {
+            Thread.sleep(5 * 6000);
             taskScheduler.scheduleAtFixedRate(new BulkProcessor(emailRepository, this), FIXED_RATE);
+        } catch (InterruptedException ex) {
+            inProgress = false;
         }
     }
 

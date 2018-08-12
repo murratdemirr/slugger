@@ -4,7 +4,7 @@ import com.demir.edge.AbstractRestHandler;
 import com.demir.edge.email.control.EmailServiceClient;
 import com.demir.edge.email.entity.Email;
 import com.demir.edge.email.entity.EmailDomain;
-import com.demir.edge.email.entity.EmailSummmary;
+import com.demir.edge.email.entity.EmailSummary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -39,8 +39,8 @@ public class EmailResource extends AbstractRestHandler {
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody @NotNull @EmailDomain String email, HttpServletRequest request, HttpServletResponse response) {
-        Email entity = client.save(email);
-        response.setHeader("Location", request.getRequestURL().append("/").append(entity.getId()).toString());
+        final Long id = client.save(email);
+        response.setHeader("Location", request.getRequestURL().append("/").append(id).toString());
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
@@ -58,7 +58,7 @@ public class EmailResource extends AbstractRestHandler {
     @RequestMapping(value = "/summary", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody
-    EmailSummmary send() {
+    EmailSummary send() {
         return client.summaryReport();
     }
 

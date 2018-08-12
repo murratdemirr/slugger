@@ -1,9 +1,14 @@
 package com.demir.edge.email.entity;
 
-public class EmailInfo {
+import java.io.Serializable;
+
+public class EmailInfo implements Serializable {
 
     private String email;
     private Long count;
+
+    public EmailInfo() {
+    }
 
     public EmailInfo(String email, Long count) {
         this.email = email;
