@@ -17,7 +17,7 @@ import org.springframework.kafka.core.ProducerFactory;
  * 8/10/18 2:01 PM
  */
 @Configuration
-public class SenderConfig {
+public class KafkaConfig {
 
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;

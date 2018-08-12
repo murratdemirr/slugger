@@ -23,7 +23,7 @@ import java.util.List;
  * 8/10/18 11:18 AM
  */
 @Component
-public class KafkaConsumerClient {
+public class QueueConsumer {
 
     @Value("${spring.kafka.template.default-topic}")
     String topicName;

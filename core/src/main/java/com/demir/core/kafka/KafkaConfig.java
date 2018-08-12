@@ -22,7 +22,7 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 
 @EnableKafka
 @Configuration
-public class KafkaConsumerConfig {
+public class KafkaConfig {
 
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
