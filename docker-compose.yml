@@ -3,7 +3,7 @@ services:
     core:
         container_name: core
         image: core
-        hostname: core
+        hostname: core-app
         build:
             context: ./core
             dockerfile: Dockerfile
@@ -20,6 +20,7 @@ services:
         command: start
     edge:
         container_name: edge
+        hostname: edge-app
         image: edge
         build:
             context: ./edge
@@ -34,6 +35,7 @@ services:
             - app-network
     kafka:
         container_name: kafka
+        hostname: kafka
         image: kafka
         build:
             context: ./kafka
@@ -43,11 +45,12 @@ services:
             - 2181:2181
         environment:
             - ADVERTISED_PORT=9092
-            - ADVERTISED_HOST=localhost
+            - ADVERTISED_HOST=127.0.0.1
         networks:
             - app-network
     datacenter:
         container_name: datacenter
+        hostname: datacenter
         image: postgres
         ports:
             - 5432:5432

@@ -4,6 +4,8 @@ import com.demir.core.EntityNotFoundException;
 import com.demir.core.email.entity.Email;
 import com.demir.core.email.entity.EmailInfo;
 import com.demir.core.email.entity.EmailSummmary;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;

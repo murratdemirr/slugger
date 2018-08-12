@@ -1,6 +1,5 @@
 package com.demir.edge;
 
-import com.demir.edge.dataset.control.DataSetManager;
 import com.demir.edge.dataset.control.DataSetRemote;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
