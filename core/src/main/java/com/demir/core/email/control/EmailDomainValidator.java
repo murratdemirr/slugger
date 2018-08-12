@@ -14,15 +14,6 @@ public class EmailDomainValidator implements ConstraintValidator<EmailDomain, St
     }
 
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        final int index = value.lastIndexOf("@");
-        if (index > 1 && index < value.length()) {
-            final String domain = value.substring((index + 1)).trim().toLowerCase();
-            for (String path : DOMAINS) {
-                if (domain.equals(path)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return EmailDomainHelper.isDomainValid(value);
     }
 }
