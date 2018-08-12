@@ -23,7 +23,6 @@ public class EmailServiceClient {
     @Value("${core.email.resource}")
     String emailResources;
 
-
     public List<Email> findAll() {
         ResponseEntity<List<Email>> response = remote.exchange(corePath +"/emails", HttpMethod.GET, null, new ParameterizedTypeReference<List<Email>>(){});
         return response.getBody();
@@ -42,7 +41,6 @@ public class EmailServiceClient {
     public EmailSummary summaryReport() {
         return remote.getForObject(corePath + "/emails/summary", EmailSummary.class);
     }
-
 
     public void update(Long id, String email) {
         remote.put(corePath + "/emails/" + id, email);

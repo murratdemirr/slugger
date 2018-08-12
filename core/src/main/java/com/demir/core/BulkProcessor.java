@@ -7,8 +7,6 @@ import java.util.List;
 
 public class BulkProcessor implements Runnable {
 
-    public static final long FIXED_RATE = 60000;
-
     private KafkaConsumerClient kafkaConsumerClient;
     private EmailRepository repository;
 

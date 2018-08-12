@@ -8,16 +8,14 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ScheduledFuture;
 
-import static com.demir.core.BulkProcessor.FIXED_RATE;
 
 /**
  * @author Demir
@@ -50,18 +48,25 @@ public class KafkaConsumerClient {
 
     @KafkaListener(topics = "${spring.kafka.template.default-topic}")
     public void topicListener(ConsumerRecord<?, ?> consumerRecord) {
+        System.out.println("Event fire start");
         if (!inProgress) {
+            System.out.println("Inprogres....");
             inProgress = true;
             triggerSchedule();
         }
+        System.out.println("Event Fire end");
     }
 
-    private synchronized void triggerSchedule() {
+    @Async
+    public synchronized void triggerSchedule() {
         try {
-            Thread.sleep(5 * 6000);
-            taskScheduler.scheduleAtFixedRate(new BulkProcessor(emailRepository, this), FIXED_RATE);
+            System.out.println("Trigger Schedule");
+            Thread.sleep(5 * 60000);
+            System.out.println("After thread sleep");
+            taskScheduler.scheduleAtFixedRate(new BulkProcessor(emailRepository, this), 5 * 60000);
         } catch (InterruptedException ex) {
             inProgress = false;
+            System.out.println("Not Inprogress");
         }
     }
 

@@ -22,7 +22,7 @@ public class DataSetMapper {
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
         //We had written this file in marshalling example
-        entity = (DataSet) jaxbUnmarshaller.unmarshal( new File("/devhome/sample.xml") );
+        entity = (DataSet) jaxbUnmarshaller.unmarshal( new File("/devhome/sample.dataset") );
         return entity;
     }
 

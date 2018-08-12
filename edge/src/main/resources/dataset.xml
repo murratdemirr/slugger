@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<dataset>
+    <emails>
+        <email>user1@comeon.com</email>
+        <email>user2@comeon.com</email>
+        <email>user3@not-so-cool.com</email>
+    </emails>
+    <resources>
+        <url>http://localhost:8088/data1</url>
+        <url>http://localhost:8088/data2</url>
+        <url>http://localhost:8088/data3</url>
+    </resources>
+</dataset>
