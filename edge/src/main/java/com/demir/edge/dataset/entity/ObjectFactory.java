@@ -10,7 +10,7 @@ import javax.xml.namespace.QName;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the com.demir.edge.dataset.entity package. 
+ * generated in the com.demir.xmlprovider package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -24,46 +24,56 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _Dataset_QNAME = new QName("", "dataset");
+    private final static QName _Email_QNAME = new QName("", "email");
+    private final static QName _Url_QNAME = new QName("", "url");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.demir.edge.dataset.entity
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.demir.xmlprovider
      * 
      */
     public ObjectFactory() {
     }
 
     /**
-     * Create an instance of {@link DatasetType }
+     * Create an instance of {@link Emails }
      * 
      */
-    public DatasetType createDatasetType() {
-        return new DatasetType();
+    public Emails createEmails() {
+        return new Emails();
     }
 
     /**
-     * Create an instance of {@link ResourcesType }
+     * Create an instance of {@link Resources }
      * 
      */
-    public ResourcesType createResourcesType() {
-        return new ResourcesType();
+    public Resources createResources() {
+        return new Resources();
     }
 
     /**
-     * Create an instance of {@link EmailsType }
+     * Create an instance of {@link Dataset }
      * 
      */
-    public EmailsType createEmailsType() {
-        return new EmailsType();
+    public Dataset createDataset() {
+        return new Dataset();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link DatasetType }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "", name = "dataset")
-    public JAXBElement<DatasetType> createDataset(DatasetType value) {
-        return new JAXBElement<DatasetType>(_Dataset_QNAME, DatasetType.class, null, value);
+    @XmlElementDecl(namespace = "", name = "email")
+    public JAXBElement<String> createEmail(String value) {
+        return new JAXBElement<String>(_Email_QNAME, String.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "", name = "url")
+    public JAXBElement<String> createUrl(String value) {
+        return new JAXBElement<String>(_Url_QNAME, String.class, null, value);
     }
 
 }

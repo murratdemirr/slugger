@@ -1,7 +1,6 @@
 package com.demir.edge.kafka;
 
 import com.demir.edge.email.control.DomainHelper;
-import com.demir.edge.email.control.EmailDomainValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.beanvalidation.BeanValidationPostProcessor;
 
 /**
  * @author Demir
@@ -17,9 +15,9 @@ import org.springframework.validation.beanvalidation.BeanValidationPostProcessor
  * 8/10/18 2:00 PM
  */
 @Service
-public class Sender {
+public class QueueSender {
 
-    private static final Logger LOG = LoggerFactory.getLogger(Sender.class);
+    private static final Logger LOG = LoggerFactory.getLogger(QueueSender.class);
 
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;

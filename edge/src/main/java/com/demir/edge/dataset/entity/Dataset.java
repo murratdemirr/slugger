@@ -1,24 +1,21 @@
 
 package com.demir.edge.dataset.entity;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
- * <p>Java class for datasetType complex type.
+ * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="datasetType">
+ * &lt;complexType>
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="emails" type="{}emailsType"/>
- *         &lt;element name="resources" type="{}resourcesType"/>
+ *         &lt;element ref="{}emails"/>
+ *         &lt;element ref="{}resources"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -28,26 +25,27 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "datasetType", propOrder = {
+@XmlType(name = "", propOrder = {
     "emails",
     "resources"
 })
-public class DatasetType {
+@XmlRootElement(name = "dataset")
+public class Dataset {
 
     @XmlElement(required = true)
-    protected EmailsType emails;
+    protected Emails emails;
     @XmlElement(required = true)
-    protected ResourcesType resources;
+    protected Resources resources;
 
     /**
      * Gets the value of the emails property.
      * 
      * @return
      *     possible object is
-     *     {@link EmailsType }
+     *     {@link Emails }
      *     
      */
-    public EmailsType getEmails() {
+    public Emails getEmails() {
         return emails;
     }
 
@@ -56,10 +54,10 @@ public class DatasetType {
      * 
      * @param value
      *     allowed object is
-     *     {@link EmailsType }
+     *     {@link Emails }
      *     
      */
-    public void setEmails(EmailsType value) {
+    public void setEmails(Emails value) {
         this.emails = value;
     }
 
@@ -68,10 +66,10 @@ public class DatasetType {
      * 
      * @return
      *     possible object is
-     *     {@link ResourcesType }
+     *     {@link Resources }
      *     
      */
-    public ResourcesType getResources() {
+    public Resources getResources() {
         return resources;
     }
 
@@ -80,10 +78,10 @@ public class DatasetType {
      * 
      * @param value
      *     allowed object is
-     *     {@link ResourcesType }
+     *     {@link Resources }
      *     
      */
-    public void setResources(ResourcesType value) {
+    public void setResources(Resources value) {
         this.resources = value;
     }
 

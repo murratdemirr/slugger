@@ -1,10 +1,10 @@
 package com.demir.edge.dataset.control;
 
 import com.demir.edge.RemoteXmlServiceException;
-import com.demir.edge.dataset.entity.DatasetType;
-import com.demir.edge.dataset.entity.EmailsType;
-import com.demir.edge.dataset.entity.ResourcesType;
-import com.demir.edge.kafka.Sender;
+import com.demir.edge.dataset.entity.Dataset;
+import com.demir.edge.dataset.entity.Emails;
+import com.demir.edge.dataset.entity.Resources;
+import com.demir.edge.kafka.QueueSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Recover;
@@ -12,23 +12,27 @@ import org.springframework.retry.annotation.Retryable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import java.net.MalformedURLException;
+
 @Service
 public class DataSetManager {
 
     @Autowired
-    Sender sender;
+    private QueueSender sender;
+    @Autowired
+    private DataSetRemote remote;
 
     @Async
-    public void process(DatasetType entity) {
+    public void process(Dataset entity) {
         if (entity != null) {
-            final EmailsType emails = entity.getEmails();
+            final Emails emails = entity.getEmails();
             if (emails != null && !emails.getEmail().isEmpty()) {
                 emails.getEmail().parallelStream().forEach(e -> {
                     sender.send(e);
                 });
             }
 
-            final ResourcesType resources = entity.getResources();
+            final Resources resources = entity.getResources();
             if (resources != null && !resources.getUrl().isEmpty()) {
                 resources.getUrl().parallelStream().forEach(url -> {
                     process(url);
@@ -38,16 +42,21 @@ public class DataSetManager {
     }
 
     @Async
-    @Retryable(value = {RemoteXmlServiceException.class}, maxAttempts = 3, backoff = @Backoff(delay = 5000))
+    @Retryable(value = {RemoteXmlServiceException.class}, backoff = @Backoff(delay = 5000))
     public void process(String url) {
-        System.out.println(url);
-        throw new RemoteXmlServiceException(url);
+        Dataset dataset = null;
+        try {
+            dataset = remote.get(url);
+        } catch (MalformedURLException e) {
+        }
+        if (dataset != null) {
+            process(dataset);
+        }
     }
 
     @Recover
     public void recover(RemoteXmlServiceException e) {
         System.out.println("recover... " + e.getUrl());
-        // ... panic
     }
 
 }

@@ -1,29 +1,22 @@
 
 package com.demir.edge.dataset.entity;
 
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for resourcesType complex type.
+ * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="resourcesType">
+ * &lt;complexType>
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="url" maxOccurs="unbounded" minOccurs="0">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
+ *         &lt;element ref="{}email" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -33,26 +26,28 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "resourcesType", propOrder = {
-    "url"
+@XmlType(name = "", propOrder = {
+    "email"
 })
-public class ResourcesType {
+@XmlRootElement(name = "emails")
+public class Emails {
 
-    protected List<String> url;
+    @XmlElement(required = true)
+    protected List<String> email;
 
     /**
-     * Gets the value of the url property.
+     * Gets the value of the email property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the url property.
+     * This is why there is not a <CODE>set</CODE> method for the email property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getUrl().add(newItem);
+     *    getEmail().add(newItem);
      * </pre>
      * 
      * 
@@ -62,11 +57,11 @@ public class ResourcesType {
      * 
      * 
      */
-    public List<String> getUrl() {
-        if (url == null) {
-            url = new ArrayList<String>();
+    public List<String> getEmail() {
+        if (email == null) {
+            email = new ArrayList<String>();
         }
-        return this.url;
+        return this.email;
     }
 
 }

@@ -1,13 +1,9 @@
 package com.demir.edge.email;
 
-import com.demir.edge.kafka.Sender;
+import com.demir.edge.kafka.QueueSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -23,7 +19,7 @@ import java.util.UUID;
 public class Resource {
 
     @Autowired
-    Sender sender;
+    QueueSender sender;
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
