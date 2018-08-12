@@ -1,5 +1,7 @@
 package com.demir.edge;
 
+import com.demir.edge.dataset.control.DataSetManager;
+import com.demir.edge.dataset.control.DataSetRemote;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -22,5 +24,10 @@ public class EdgeApplication {
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplateBuilder().errorHandler(new RestTemplateResponseErrorHandler()).build();
+    }
+
+    @Bean
+    public DataSetRemote dataSetRemote(){
+        return new DataSetRemote();
     }
 }
