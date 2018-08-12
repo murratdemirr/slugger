@@ -1,18 +1,16 @@
 package com.demir.core.kafka;
 
-import com.demir.core.BulkProcessor;
-import com.demir.core.email.control.EmailRepository;
+import com.demir.core.ProcessorListener;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.scheduling.TaskScheduler;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+import java.util.concurrent.CountDownLatch;
 
 
 /**
@@ -28,11 +26,9 @@ public class QueueConsumer {
     @Autowired
     KafkaConsumer<String, String> consumer;
     @Autowired
-    TaskScheduler taskScheduler;
-    @Autowired
-    EmailRepository emailRepository;
+    ProcessorListener listener;
 
-    private boolean inProgress = false;
+    private CountDownLatch latch = new CountDownLatch(1);
 
     public Map<String, Long> fetchFromQueue() {
         consumer.subscribe(Collections.singletonList(topicName));
@@ -53,27 +49,14 @@ public class QueueConsumer {
 
     @KafkaListener(topics = "${spring.kafka.template.default-topic}")
     public void topicListener(ConsumerRecord<?, ?> consumerRecord) {
-        System.out.println("Event fire start");
-        if (!inProgress) {
-            System.out.println("Inprogres....");
-            inProgress = true;
-            triggerSchedule();
+        if (latch.getCount() == 1) {
+            listener.executeAsynchronously();
         }
-        System.out.println("Event Fire end");
+        latch.countDown();
     }
 
-    @Async
-    public synchronized void triggerSchedule() {
-        try {
-            System.out.println("Trigger Schedule");
-            Thread.sleep(60000);
-            System.out.println("After thread sleep");
-            taskScheduler.scheduleAtFixedRate(new BulkProcessor(emailRepository, this), 60000);
-        } catch (InterruptedException ex) {
-            inProgress = false;
-            System.out.println("Not Inprogress");
-        }
+    public CountDownLatch getLatch() {
+        return latch;
     }
-
 
 }
