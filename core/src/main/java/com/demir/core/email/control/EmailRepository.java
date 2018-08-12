@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 
+import static com.demir.core.email.entity.Email.COUNT_BY_EMAIL;
 import static com.demir.core.email.entity.Email.FIND_ALL;
 import static com.demir.core.email.entity.Email.FIND_EMAIL_INFOS;
 
@@ -51,7 +52,7 @@ public class EmailRepository {
         return em.merge(new Email(email));
     }
 
-    public void save(final List<String> emails) {
+    public void save(final List<Email> emails) {
         if (emails != null && !emails.isEmpty()) {
             emails.forEach(e -> save(e));
         }
@@ -62,6 +63,18 @@ public class EmailRepository {
         List<EmailInfo> resultList = em.createNamedQuery(FIND_EMAIL_INFOS).getResultList();
         emailSummmary.setEmailInfos(resultList);
         return emailSummmary;
+    }
+
+    public Long countByEmail(final String email){
+        Long count = Long.valueOf(0);
+        Object result = em.createNamedQuery(COUNT_BY_EMAIL)
+                .setParameter("email", email)
+                .setMaxResults(1)
+                .getSingleResult();
+        if (result != null) {
+            count = (Long) result;
+        }
+        return count;
     }
 
 }

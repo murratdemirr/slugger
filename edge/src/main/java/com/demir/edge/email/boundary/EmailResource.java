@@ -58,8 +58,15 @@ public class EmailResource extends AbstractRestHandler {
     @RequestMapping(value = "/summary", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody
-    EmailSummary send() {
+    EmailSummary summary() {
         return client.summaryReport();
+    }
+
+    @RequestMapping(value = "/count/{email}", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public @ResponseBody
+    Long count(@PathVariable("email") String email) {
+        return client.countByEmail(email);
     }
 
 }

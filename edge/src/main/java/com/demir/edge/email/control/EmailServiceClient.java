@@ -49,4 +49,8 @@ public class EmailServiceClient {
     public Email find(Long id) {
         return remote.getForObject(corePath + "/emails/" + id, Email.class);
     }
+
+    public Long countByEmail(String email) {
+       return remote.getForObject(corePath + "/emails/count/" + email, Long.class);
+    }
 }

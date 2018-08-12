@@ -12,9 +12,7 @@ import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 
 /**
@@ -36,14 +34,21 @@ public class QueueConsumer {
 
     private boolean inProgress = false;
 
-    public List<String> fetchFromQueue() {
+    public Map<String, Long> fetchFromQueue() {
         consumer.subscribe(Collections.singletonList(topicName));
         ConsumerRecords<String, String> records = consumer.poll(5000);
-        List<String> data = new ArrayList<>();
+
+        // Email / Count
+        Map<String, Long> map = new HashMap<>();
         for (ConsumerRecord<String, String> record : records) {
-            data.add(record.value());
+            final String email = record.value();
+            if (map.containsKey(email)) {
+                map.replace(email, map.get(email) + 1);
+            } else {
+                map.put(email, Long.valueOf(1));
+            }
         }
-        return data;
+        return map;
     }
 
     @KafkaListener(topics = "${spring.kafka.template.default-topic}")
@@ -61,9 +66,9 @@ public class QueueConsumer {
     public synchronized void triggerSchedule() {
         try {
             System.out.println("Trigger Schedule");
-            Thread.sleep(5 * 60000);
+            Thread.sleep(60000);
             System.out.println("After thread sleep");
-            taskScheduler.scheduleAtFixedRate(new BulkProcessor(emailRepository, this), 5 * 60000);
+            taskScheduler.scheduleAtFixedRate(new BulkProcessor(emailRepository, this), 60000);
         } catch (InterruptedException ex) {
             inProgress = false;
             System.out.println("Not Inprogress");

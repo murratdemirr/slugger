@@ -26,13 +26,15 @@ public class EmailResource extends AbstractRestHandler {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody List<Email> all() {
+    public @ResponseBody
+    List<Email> all() {
         return repository.findAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody Email find(@PathVariable("id") Long id) {
+    public @ResponseBody
+    Email find(@PathVariable("id") Long id) {
         return repository.find(id);
     }
 
@@ -57,8 +59,16 @@ public class EmailResource extends AbstractRestHandler {
 
     @RequestMapping(value = "/summary", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody EmailSummmary send() {
+    public @ResponseBody
+    EmailSummmary send() {
         return repository.summaryReport();
+    }
+
+    @RequestMapping(value = "/count/{email}", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public @ResponseBody
+    Long send(@PathVariable("email") String email) {
+        return repository.countByEmail(email);
     }
 
 }
