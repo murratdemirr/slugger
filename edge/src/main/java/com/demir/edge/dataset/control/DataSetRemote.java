@@ -18,13 +18,7 @@ public class DataSetRemote {
 
     @Retryable(value = {Exception.class}, maxAttempts = 3,backoff = @Backoff(delay = 5000))
     public Dataset find(String url) throws Exception {
-        System.out.println("process.. " + url);
         return  get(url);
-    }
-
-    @Recover
-    public void recover(Exception e) {
-        System.out.println("recover... ");
     }
 
     public Dataset get(final String address) throws Exception {

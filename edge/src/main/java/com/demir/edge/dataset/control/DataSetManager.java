@@ -5,6 +5,7 @@ import com.demir.edge.dataset.entity.Emails;
 import com.demir.edge.dataset.entity.Resources;
 import com.demir.edge.kafka.QueueSender;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 
@@ -16,6 +17,7 @@ public class DataSetManager {
     @Autowired
     private DataSetRemote remote;
 
+    @Async
     public void process(Dataset entity) {
         if (entity != null) {
             final Emails emails = entity.getEmails();
