@@ -4,6 +4,8 @@ import com.demir.core.EntityNotFoundException;
 import com.demir.core.email.entity.Email;
 import com.demir.core.email.entity.EmailInfo;
 import com.demir.core.email.entity.EmailSummmary;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -40,8 +42,8 @@ public class EmailRepository {
         em.remove(find(id));
     }
 
-    public void save(Email email) {
-        em.merge(email);
+    public Email save(Email email) {
+       return em.merge(email);
     }
 
     public List<Email> findAll() {
