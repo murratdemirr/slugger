@@ -24,6 +24,7 @@ Core API listens to the Kafka Queue for each message from any edge API and each 
 # Edge Api
 
 This application provides that xml feed endpoint and proxy restful client via core app. 
+The main goal of this application is parsing XML and send each email address to Kafka Queue.
 
 Notice: You can run this application as multiple instances. 
 
