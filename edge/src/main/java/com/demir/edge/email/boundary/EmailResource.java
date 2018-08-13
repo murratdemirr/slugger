@@ -47,7 +47,7 @@ public class EmailResource extends AbstractRestHandler {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateTask(@PathVariable("id") Long id, @RequestBody @NotNull @EmailDomain String email) {
+    public void update(@PathVariable("id") Long id, @RequestBody @NotNull @EmailDomain String email) {
         client.update(id, email);
     }
 
