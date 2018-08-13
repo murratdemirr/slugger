@@ -28,7 +28,7 @@ The main goal of this application is parsing XML and send each email address to 
 
 Notice: You can run this application as multiple instances. 
 
-for more information about rest services look at the below link
+Each API provides swagger service documentation. For more information about rest services look at the below link
 
 http://localhost:8085/edge/api/v1/swagger-ui.html
 
