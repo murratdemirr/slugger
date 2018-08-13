@@ -1,9 +1,8 @@
-# slugger
 
 A demo for Spring Boot microservices and dockerized example
 
 
-#How to run
+# How to run
 
 You can run the application with docker compose.
 
