@@ -19,7 +19,6 @@ More information on how to run can be found at: https://docs.docker.com/compose/
 # Core Api
 
 This application developed with spring boot and provides email restful endpoints and processing batch stuff. 
-
 Core API listens to the Kafka Queue for each message from any edge API and each 5 minute thus data write to a database.
 
 # Edge Api
@@ -33,4 +32,3 @@ for more information about rest services look at the below link
 http://localhost:8085/edge/api/v1/swagger-ui.html
 
 
-* Core Application : This application provides email restfull endpoid and 
