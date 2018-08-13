@@ -7,7 +7,7 @@ You can run the application with docker compose.
 
 Here are some docker command lines you can use.
 
-**Lunch the whole project in docker container.**
+**Deploy the whole project in docker container.**
 > docker-compose up -d 
 
 Notice: Before the deploying the application in docker please make sure 
