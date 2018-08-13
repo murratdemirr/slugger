@@ -3,7 +3,6 @@ services:
     core:
         container_name: core
         image: core
-        hostname: core-app
         build:
             context: ./core
             dockerfile: Dockerfile
@@ -18,9 +17,10 @@ services:
         networks:
             - app-network
         command: start
+        environment:
+        - SPRING_PROFILES_ACTIVE=prod
     edge:
         container_name: edge
-        hostname: edge-app
         image: edge
         build:
             context: ./edge
@@ -33,9 +33,10 @@ services:
             - core
         networks:
             - app-network
+        environment:
+          - SPRING_PROFILES_ACTIVE=prod
     kafka:
         container_name: kafka
-        hostname: kafka
         image: kafka
         build:
             context: ./kafka
@@ -45,7 +46,7 @@ services:
             - 2181:2181
         environment:
             - ADVERTISED_PORT=9092
-            - ADVERTISED_HOST=127.0.0.1
+            - ADVERTISED_HOST=kafka
         networks:
             - app-network
     datacenter:

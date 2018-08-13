@@ -24,6 +24,7 @@ public class EmailServiceClient {
     String emailResources;
 
     public List<Email> findAll() {
+        System.out.println(corePath);
         ResponseEntity<List<Email>> response = remote.exchange(corePath +"/emails", HttpMethod.GET, null, new ParameterizedTypeReference<List<Email>>(){});
         return response.getBody();
     }

@@ -6,8 +6,11 @@ import java.io.Serializable;
 @XmlRootElement
 public class RestErrorInfo implements Serializable {
 
-    private final String detail;
-    private final String message;
+    private String detail;
+    private String message;
+
+    public RestErrorInfo() {
+    }
 
     public RestErrorInfo(Exception ex, String detail) {
         this.message = ex.getLocalizedMessage();
