@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProcessorListener {
 
+    private static final long TIME_PERIOD_AS_MILLISECONDS = 5 * 60 * 1000;
+
     @Autowired
     private TaskExecutor taskExecutor;
     @Autowired
@@ -27,8 +29,8 @@ public class ProcessorListener {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(6000);
-                    taskScheduler.scheduleAtFixedRate(new BulkProcessor(repository,queueConsumer), 6000);
+                    Thread.sleep(TIME_PERIOD_AS_MILLISECONDS);
+                    taskScheduler.scheduleAtFixedRate(new BulkProcessor(repository, queueConsumer), TIME_PERIOD_AS_MILLISECONDS);
                 } catch (InterruptedException e) {
                 }
             }
