@@ -44,13 +44,13 @@ public class Email {
     @Column(name = "EMAIL", nullable = false)
     private String email;
 
-    @Column(name = "CREATED_TIME", nullable = false)
+    @Column(name = "CREATED_TIME")
     private LocalDateTime createdTime;
 
-    @Column(name = "ENCOUNTERED_TIMES", nullable = false)
+    @Column(name = "ENCOUNTERED_TIMES")
     private Long encounteredTimes;
 
-    @Column(name = "BATCH_ID", nullable = false)
+    @Column(name = "BATCH_ID")
     private String batchId;
 
     public Email() {
